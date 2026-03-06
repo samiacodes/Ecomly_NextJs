@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             {/* কোম্পানির বিবরণ */}
             <div className="bg-gray-50 p-4 rounded-lg">
-              <h3 className="font-semibold text-lg mb-2">Packly</h3>
+              <h3 className="font-semibold text-lg mb-2">eComly</h3>
               <p className="text-sm text-gray-600">
                 Our products are arranged directly from brands or authorized distributors. 
                 They're stored and shipped directly from our climate-controlled, GMP-certified warehouse.

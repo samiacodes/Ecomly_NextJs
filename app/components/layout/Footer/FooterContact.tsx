@@ -14,15 +14,15 @@ export default function FooterContact() {
         <ul className="space-y-3">
           <li className="flex items-start space-x-3">
             <MapPin size={20} className="text-gray-500 mt-1 flex-shrink-0" />
-            <span className="text-gray-600">House #4, Rd No. 2(A), Dhanmondi, Dhaka 1209</span>
+            <span className="text-gray-600">House #4, Rd No. 2(A) Uttora, Dhaka 1225</span>
           </li>
           <li className="flex items-center space-x-3">
             <Phone size={20} className="text-gray-500" />
-            <span className="text-gray-600">+880670145555</span>
+            <span className="text-gray-600">+880698777788</span>
           </li>
           <li className="flex items-center space-x-3">
             <Mail size={20} className="text-gray-500" />
-            <span className="text-gray-600">info@packly.com</span>
+            <span className="text-gray-600">info@eComly.com</span>
           </li>
         </ul>
       </div>
