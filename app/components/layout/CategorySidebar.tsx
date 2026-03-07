@@ -3,10 +3,12 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { 
+  ShoppingBag, 
   Gem, 
   Footprints, 
   Sparkles, 
   Shirt, 
+  Shirt as Dress, // Dress নেই, Shirt ব্যবহার করছি
   Glasses,
   Baby,
   Watch,
@@ -14,14 +16,15 @@ import {
   ChevronRight,
   X
 } from 'lucide-react'
+import { useLanguage } from '@/app/context/LanguageContext'
 
 const categories = [
-//   { name: 'Bags', icon: Bag, href: '/categories/bags' },
+  { name: 'Bags', icon: ShoppingBag, href: '/categories/bags' },
   { name: 'Jewelry', icon: Gem, href: '/categories/jewelry' },
   { name: 'Shoes', icon: Footprints, href: '/categories/shoes' },
   { name: 'Beauty', icon: Sparkles, href: '/categories/beauty' },
   { name: 'Mens Wear', icon: Shirt, href: '/categories/mens-wear' },
-//   { name: 'Women Wear', icon: Dress, href: '/categories/women-wear' },
+  { name: 'Women Wear', icon: Shirt, href: '/categories/women-wear' }, // Dress নেই
   { name: 'Eyewear', icon: Glasses, href: '/categories/eyewear' },
   { name: 'Baby Items', icon: Baby, href: '/categories/baby-items' },
   { name: 'Watches', icon: Watch, href: '/categories/watches' },
@@ -35,27 +38,29 @@ interface CategorySidebarProps {
 
 export default function CategorySidebar({ isOpen, onClose }: CategorySidebarProps) {
   const pathname = usePathname()
-
-  if (!isOpen) return null
+  const { t } = useLanguage()
 
   return (
     <>
-      {/* ওভারলে (মোবাইলের জন্য) */}
-      <div 
-        className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-        onClick={onClose}
-      />
+      {/* ওভারলে - শুধু মোবাইলে যখন ওপেন */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={onClose}
+        />
+      )}
       
       {/* সাইডবার */}
       <aside className={`
         fixed top-0 left-0 h-full w-72 bg-white shadow-xl z-50
         transition-transform duration-300 ease-in-out
         lg:static lg:shadow-sm lg:translate-x-0
+        ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         <div className="p-4">
-          {/* হেডার */}
+          {/* হেডার - শুধু মোবাইলে */}
           <div className="flex items-center justify-between mb-4 lg:hidden">
-            <h2 className="font-bold text-lg text-gray-800">Categories</h2>
+            <h2 className="font-bold text-lg text-gray-800">{t('nav.categories')}</h2>
             <button 
               onClick={onClose}
               className="p-2 hover:bg-gray-100 rounded-lg"
