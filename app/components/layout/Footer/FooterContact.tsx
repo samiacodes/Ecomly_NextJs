@@ -13,7 +13,7 @@ export default function FooterContact() {
         <h3 className="font-semibold text-lg mb-4">{t('footer.contact')}</h3>
         <ul className="space-y-3">
           <li className="flex items-start space-x-3">
-            <MapPin size={20} className="text-gray-500 mt-1 flex-shrink-0" />
+            <MapPin size={20} className="text-gray-500 mt-1 shrink-0" />
             <span className="text-gray-600">House #4, Rd No. 2(A) Uttora, Dhaka 1225</span>
           </li>
           <li className="flex items-center space-x-3">
@@ -30,13 +30,13 @@ export default function FooterContact() {
       <div>
         <h3 className="font-semibold text-lg mb-3">Follow us on</h3>
         <div className="flex space-x-4">
-          <Link href="https://facebook.com" className="bg-gray-100 p-2 rounded-full hover:bg-primary hover:text-white transition">
+          <Link href="https://facebook.com" className="bg-gray-100 p-2 rounded-full hover:bg-black hover:text-white transition">
             <Facebook size={20} />
           </Link>
-          <Link href="https://instagram.com" className="bg-gray-100 p-2 rounded-full hover:bg-primary hover:text-white transition">
+          <Link href="https://instagram.com" className="bg-gray-100 p-2 rounded-full hover:bg-black hover:text-white transition">
             <Instagram size={20} />
           </Link>
-          <Link href="https://youtube.com" className="bg-gray-100 p-2 rounded-full hover:bg-primary hover:text-white transition">
+          <Link href="https://youtube.com" className="bg-gray-100 p-2 rounded-full hover:bg-black hover:text-white transition">
             <Youtube size={20} />
           </Link>
         </div>

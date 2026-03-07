@@ -1,10 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import NavbarMobile from './NavbarMobile'
 import NavbarDesktop from './NavbarDesktop'
-
-
+import NavbarMobile from './NavbarMobile'
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false)
@@ -23,7 +21,7 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="container-custom">
-        {isMobile ? <NavbarMobile/> : <NavbarDesktop />}
+        {isMobile ? <NavbarMobile /> : <NavbarDesktop />}
       </div>
     </nav>
   )

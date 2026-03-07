@@ -2,13 +2,19 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, ShoppingCart, User, Globe } from 'lucide-react'
+import { Menu, X, ShoppingCart } from 'lucide-react'
 import SearchBar from './SearchBar'
+import LanguageToggle from './LanguageToggle'
 import { useLanguage } from '@/app/context/LanguageContext'
 
 export default function NavbarMobile() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { t, toggleLanguage, language } = useLanguage()
+  const { t } = useLanguage()
+
+  const handleCategoriesClick = () => {
+    setIsMenuOpen(false)
+    window.dispatchEvent(new Event('toggleCategorySidebar'))
+  }
 
   return (
     <>
@@ -18,6 +24,9 @@ export default function NavbarMobile() {
         </Link>
 
         <div className="flex items-center space-x-4">
+          {/* ল্যাঙ্গুয়েজ টগল মোবাইলে টপবারে */}
+          <LanguageToggle />
+          
           <Link href="/cart" className="relative">
             <ShoppingCart size={22} />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
@@ -37,29 +46,50 @@ export default function NavbarMobile() {
       {isMenuOpen && (
         <div className="py-4 border-t border-gray-100">
           <div className="flex flex-col space-y-4">
-            <Link href="/categories" className="text-gray-700">{t('nav.categories')}</Link>
-            <Link href="/products" className="text-gray-700">{t('nav.products')}</Link>
-            <Link href="/shops" className="text-gray-700">{t('nav.shops')}</Link>
+            <button 
+              onClick={handleCategoriesClick}
+              className="flex items-center gap-2 text-gray-700 font-medium text-left"
+            >
+              <Menu size={18} />
+              {t('nav.categories')}
+            </button>
+            
+            <Link href="/products" className="text-gray-700" onClick={() => setIsMenuOpen(false)}>
+              {t('nav.products')}
+            </Link>
+            <Link href="/shops" className="text-gray-700" onClick={() => setIsMenuOpen(false)}>
+              {t('nav.shops')}
+            </Link>
             
             <div className="border-t border-gray-100 my-2"></div>
             
-            <Link href="/track-order" className="text-gray-600">{t('nav.track')}</Link>
-            <Link href="/help" className="text-gray-600">{t('nav.help')}</Link>
-            <Link href="/sell" className="text-gray-600">{t('nav.sell')}</Link>
-            
-            <div className="border-t border-gray-100 my-2"></div>
-            
-            <div className="flex items-center justify-between">
-              <button onClick={toggleLanguage} className="flex items-center space-x-2">
-                <Globe size={20} />
-                <span>{t('nav.lang.full')}</span>
-              </button>
-              <div className="flex items-center space-x-3">
-                <Link href="/login" className="text-primary">{t('nav.login')}</Link>
-                <span>|</span>
-                <Link href="/signup" className="text-primary">{t('nav.signup')}</Link>
-              </div>
+            {/* লগিন/রেজিস্টার */}
+            <div className="flex items-center gap-3 py-2">
+              <Link 
+                href="/login" 
+                className="flex-1 bg-primary-600 text-white text-center py-2 rounded-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t('nav.login')}
+              </Link>
+              <Link 
+                href="/register" 
+                className="flex-1 border border-primary-600 text-primary-600 text-center py-2 rounded-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t('nav.signup')}
+              </Link>
             </div>
+            
+            <Link href="/track-order" className="text-gray-600" onClick={() => setIsMenuOpen(false)}>
+              {t('nav.track')}
+            </Link>
+            <Link href="/help" className="text-gray-600" onClick={() => setIsMenuOpen(false)}>
+              {t('nav.help')}
+            </Link>
+            <Link href="/sell" className="text-gray-600" onClick={() => setIsMenuOpen(false)}>
+              {t('nav.sell')}
+            </Link>
           </div>
         </div>
       )}
