@@ -9,7 +9,10 @@ export default function NavbarDesktop() {
   const { t } = useLanguage()
 
   const handleCategoriesClick = () => {
-    window.dispatchEvent(new Event('toggleCategorySidebar'))
+    // চেক করুন ব্রাউজারে window আছে কিনা
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('toggleCategorySidebar'))
+    }
   }
 
   return (
@@ -25,7 +28,6 @@ export default function NavbarDesktop() {
         <div className="flex items-center gap-4">
           <LanguageToggle />
           
-          {/* লগিন/রেজিস্টার */}
           <div className="flex items-center gap-2 border-r border-gray-200 pr-4 mr-2">
             <Link 
               href="/login" 
@@ -56,7 +58,7 @@ export default function NavbarDesktop() {
         <div className="flex items-center space-x-8">
           <button 
             onClick={handleCategoriesClick}
-            className="flex items-center gap-2 text-gray-700 hover:text-primary-700 font-medium"
+            className="flex items-center gap-2 text-gray-700 hover:text-primary-700 font-medium cursor-pointer"
           >
             <Menu size={18} />
             {t('nav.categories')}
