@@ -4,7 +4,7 @@ const SITES = [
   { id: 'chinaonline', name: 'China Online BD', url: 'https://kolzsticks.github.io/Free-Ecommerce-Products-Api/main/products.json' },
   { id: 'skybuy', name: 'Sky Buy BD', url: 'https://kolzsticks.github.io/Free-Ecommerce-Products-Api/main/products.json' },
   { id: 'packly', name: 'Packly', url: 'https://kolzsticks.github.io/Free-Ecommerce-Products-Api/main/products.json' },
-  { id: 'dummy', name: 'Dummy Site', url: 'https://dummy-site.com/products.json' }, // এইটা এরর দেবে
+  { id: 'dummy', name: 'Dummy Site', url: 'https://dummy-site.com/products.json' }, 
 ]
 
 // একটা সাইট থেকে ডাটা আনার ফাংশন
