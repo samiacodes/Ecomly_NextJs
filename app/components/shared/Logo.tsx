@@ -9,14 +9,14 @@ interface LogoProps {
 }
 
 export default function Logo({ 
-  showText = true, 
+  showText = false, // Changed default to false - only show image
   className = '',
   imageClassName = '',
   textClassName = ''
 }: LogoProps) {
   return (
     <Link href="/" className={`flex items-center gap-2 ${className}`}>
-      <div className={`relative h-20 w-35 overflow-hidden ${imageClassName}`}>
+      <div className={`relative h-[50px] w-[180px] overflow-hidden ${imageClassName}`}>
         <Image
           src="/logo.png"
           alt="Ecomly"

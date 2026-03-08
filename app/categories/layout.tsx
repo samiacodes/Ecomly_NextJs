@@ -12,32 +12,36 @@ export default function CategoriesLayout({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const pathname = usePathname()
 
-  // ইউআরএল চেঞ্জ হলে সাইডবার ক্লোজ করুন (মোবাইলের জন্য)
+  // Close sidebar when URL changes (for mobile)
   useEffect(() => {
     if (window.innerWidth < 1024) {
       setIsSidebarOpen(false)
     }
   }, [pathname])
 
-  // কাস্টম ইভেন্ট লিসেনার
+  // Custom event listener for toggle button
   useEffect(() => {
-    // গ্লোবাল ফাংশন তৈরি করুন
     const toggleSidebar = () => {
-      setIsSidebarOpen(prev => !prev)
+      console.log('🔍 Toggle event received in layout')
+      setIsSidebarOpen(prev => {
+        const newState = !prev
+        console.log('📂 Sidebar state changed from', prev, 'to', newState)
+        return newState
+      })
     }
 
-    // ইভেন্ট লিসেনার
+    console.log('🔍 Setting up toggle event listener')
     window.addEventListener('toggleCategorySidebar', toggleSidebar)
     
-    // ক্লিনআপ
     return () => {
+      console.log('🔍 Cleaning up toggle event listener')
       window.removeEventListener('toggleCategorySidebar', toggleSidebar)
     }
   }, [])
 
   return (
-    <div className="container-custom py-8">
-      <div className="flex gap-8">
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex gap-6">
         <CategorySidebar
           isOpen={isSidebarOpen} 
           onClose={() => setIsSidebarOpen(false)} 

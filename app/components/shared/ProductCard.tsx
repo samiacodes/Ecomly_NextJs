@@ -29,9 +29,10 @@ export default function ProductCard({
 }: ProductCardProps) {
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const [imageError, setImageError] = useState(false)
   const { t } = useLanguage()
 
-  // ডিসকাউন্ট ক্যালকুলেট
+  // Calculate discount percentage
   const discountPercentage = oldPrice 
     ? Math.round(((oldPrice - price) / oldPrice) * 100) 
     : discount
@@ -42,26 +43,27 @@ export default function ProductCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* ইমেজ সেকশন */}
+      {/* Image Section */}
       <div className="relative h-64 w-full overflow-hidden bg-gray-100">
         <Image
-          src={image}
+          src={imageError ? '/placeholder.jpg' : image}
           alt={name}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
+          onError={() => setImageError(true)}
         />
         
-        {/* ব্যাজ */}
+        {/* Badge */}
         {discountPercentage && (
-          <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">
+          <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full z-10">
             -{discountPercentage}%
           </span>
         )}
         
-        {/* উইশলিস্ট বাটন */}
+        {/* Wishlist Button */}
         <button 
           onClick={() => setIsWishlisted(!isWishlisted)}
-          className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:bg-red-50 transition-colors"
+          className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:bg-red-50 transition-colors z-10"
         >
           <Heart 
             size={18} 
@@ -69,11 +71,11 @@ export default function ProductCard({
           />
         </button>
 
-        {/* কুইক ভিউ - হোভারে দেখাবে */}
+        {/* Quick View - Show on hover */}
         <div className={`absolute inset-0 bg-black/40 flex items-center justify-center gap-3 transition-opacity duration-300 ${
           isHovered ? 'opacity-100' : 'opacity-0'
         }`}>
-          <Link href={`/product/${id}`}>
+          <Link href={`/products/${id}`}>
             <button className="bg-white p-3 rounded-full hover:bg-primary hover:text-white transition-colors">
               <Eye size={20} />
             </button>
@@ -84,9 +86,9 @@ export default function ProductCard({
         </div>
       </div>
 
-      {/* কন্টেন্ট সেকশন */}
+      {/* Content Section */}
       <div className="p-4">
-        {/* রেটিং */}
+        {/* Rating */}
         <div className="flex items-center gap-2 mb-2">
           <div className="flex items-center">
             {[...Array(5)].map((_, i) => (
@@ -100,14 +102,14 @@ export default function ProductCard({
           <span className="text-sm text-gray-500">({reviewCount})</span>
         </div>
 
-        {/* প্রোডাক্ট নাম */}
-        <Link href={`/product/${id}`}>
+        {/* Product Name */}
+        <Link href={`/products/${id}`}>
           <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary transition-colors">
             {name}
           </h3>
         </Link>
 
-        {/* প্রাইস */}
+        {/* Price */}
         <div className="flex items-center gap-2 mb-4">
           <span className="text-xl font-bold text-gray-900">৳{price.toLocaleString()}</span>
           {oldPrice && (
@@ -115,7 +117,7 @@ export default function ProductCard({
           )}
         </div>
 
-        {/* অ্যাড টু কার্ট বাটন */}
+        {/* Add to Cart Button */}
         <button className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors flex items-center justify-center gap-2">
           <ShoppingCart size={18} />
           {t('products.addToCart')}

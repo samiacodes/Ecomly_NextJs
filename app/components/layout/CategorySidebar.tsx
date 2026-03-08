@@ -39,36 +39,43 @@ export default function CategorySidebar({ isOpen, onClose }: CategorySidebarProp
   const pathname = usePathname()
   const { t } = useLanguage()
 
+  console.log('📂 CategorySidebar - isOpen:', isOpen)
+
   return (
     <>
-      {/* ওভারলে */}
+      {/* Overlay */}
       {isOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={onClose}
+          aria-hidden="true"
         />
       )}
       
-      {/* সাইডবার */}
-      <aside className={`
-        fixed top-0 left-0 h-full w-72 bg-white shadow-xl z-50
-        transition-transform duration-300 ease-in-out
-        lg:static lg:shadow-sm
-        ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-      `}>
+      {/* Sidebar */}
+      <aside 
+        className={`
+          fixed top-0 left-0 h-full w-72 bg-white shadow-xl z-50
+          transition-transform duration-300 ease-in-out
+          lg:static lg:shadow-sm lg:transform-none
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+          lg:translate-x-0
+        `}
+      >
         <div className="p-4">
-          {/* হেডার */}
+          {/* Header */}
           <div className="flex items-center justify-between mb-4 lg:hidden">
             <h2 className="font-bold text-lg text-gray-800">{t('nav.categories')}</h2>
             <button 
               onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-lg"
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label="Close sidebar"
             >
               <X size={20} />
             </button>
           </div>
 
-          {/* ক্যাটাগরি লিস্ট */}
+          {/* Category List */}
           <nav className="space-y-1">
             {categories.map((category) => {
               const Icon = category.icon

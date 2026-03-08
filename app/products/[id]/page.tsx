@@ -2,33 +2,35 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { Star, ShoppingCart, Heart } from 'lucide-react'
 import { getAllSitesProducts } from '@/app/lib/products'
+import { Product } from '@/app/types/product'
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  // ১. সব সাইট থেকে প্রোডাক্ট ডাটা লোড করুন
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  // 1. Load product data from all sites
   const sitesData = await getAllSitesProducts()
   const allProducts = sitesData.flatMap(site => site.products)
   
-  // ২. URL-এর আইডি অনুযায়ী প্রোডাক্ট খুঁজুন
-  const product = allProducts.find((p: any) => p.id === params.id)
+  // 2. Find product by ID from URL params
+  const resolvedParams = await params
+  const product = allProducts.find((p: Product) => p.id === resolvedParams.id)
   
-  // ৩. প্রোডাক্ট না পেলে 404 পেজ দেখান
+  // 3. Show 404 if product not found
   if (!product) {
     notFound()
   }
 
-  // ৪. প্রোডাক্ট পেলে ডিটেইল দেখান
+  // 4. Display product details
   return (
     <div className="bg-gray-50 min-h-screen">
-      <div className="container-custom py-8">
-        {/* ব্রেডক্রম্ব */}
+      <div className="container mx-auto px-4 py-8">
+        {/* Breadcrumb */}
         <div className="text-sm text-gray-500 mb-6">
           Home / Products / {product.name}
         </div>
 
-        {/* প্রোডাক্ট ডিটেইল কার্ড */}
+        {/* Product Detail Card */}
         <div className="bg-white rounded-xl shadow-sm p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* ইমেজ */}
+            {/* Image */}
             <div className="relative h-96 bg-gray-100 rounded-lg overflow-hidden">
               <Image
                 src={product.image}
@@ -38,11 +40,11 @@ export default async function ProductPage({ params }: { params: { id: string } }
               />
             </div>
 
-            {/* ইনফো */}
+            {/* Info */}
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
               
-              {/* রেটিং */}
+              {/* Rating */}
               <div className="flex items-center gap-4 mb-6">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
@@ -59,19 +61,26 @@ export default async function ProductPage({ params }: { params: { id: string } }
                 <span className="text-gray-600">({product.rating?.count || 0} reviews)</span>
               </div>
 
-              {/* প্রাইস */}
+              {/* Price */}
               <div className="mb-6">
-                <span className="text-3xl font-bold text-gray-900">
-                  ৳{(product.priceCents / 100).toLocaleString()}
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl font-bold text-gray-900">
+                    ৳{product.price.toLocaleString()}
+                  </span>
+                  {product.oldPrice && (
+                    <span className="text-lg text-gray-400 line-through">
+                      ৳{product.oldPrice.toLocaleString()}
+                    </span>
+                  )}
+                </div>
               </div>
 
-              {/* ডেসক্রিপশন */}
+              {/* Description */}
               <p className="text-gray-600 mb-8">
                 {product.description || 'No description available'}
               </p>
 
-              {/* অ্যাকশন বাটন */}
+              {/* Action Buttons */}
               <div className="flex gap-4">
                 <button className="flex-1 bg-primary-600 text-white py-3 rounded-lg font-semibold hover:bg-primary-700 transition flex items-center justify-center gap-2">
                   <ShoppingCart size={20} />

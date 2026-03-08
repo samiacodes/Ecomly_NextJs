@@ -1,13 +1,21 @@
-import { getAllSitesProducts } from '../lib/products'
-import ProductCard from '../components/shared/ProductCard'
+import { getCategoryProducts } from '@/app/lib/products'
+import ProductCard from '@/app/components/shared/ProductCard'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 
-export default async function CategoriesPage() {
-  const sitesData = await getAllSitesProducts()
-  const allProducts = sitesData.flatMap(site => site.products)
-  const featuredProducts = allProducts.slice(0, 12)
+interface CategoryPageProps {
+  params: Promise<{
+    id: string
+  }>
+}
 
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const resolvedParams = await params
+  const categoryId = parseInt(resolvedParams.id)
+  
+  // Fetch products for this category
+  const products = await getCategoryProducts(categoryId)
+  
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4 py-8">
@@ -17,21 +25,25 @@ export default async function CategoriesPage() {
             Home
           </Link>
           <ChevronRight size={16} />
-          <span className="text-gray-900 font-medium">All Categories</span>
+          <Link href="/categories" className="hover:text-primary">
+            Categories
+          </Link>
+          <ChevronRight size={16} />
+          <span className="text-gray-900 font-medium">Category #{categoryId}</span>
         </div>
         
         {/* Header */}
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          All Categories
+          Category Products
         </h1>
         <p className="text-gray-600 mb-8">
-          Browse through our complete collection of products
+          Showing {products.length} {products.length === 1 ? 'product' : 'products'}
         </p>
         
         {/* Products Grid */}
-        {featuredProducts.length > 0 ? (
+        {products.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {featuredProducts.map((product) => (
+            {products.map((product) => (
               <ProductCard
                 key={product.id}
                 id={product.id}
@@ -62,7 +74,15 @@ export default async function CategoriesPage() {
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">No products found</h3>
-            <p className="text-gray-600">We couldn&apos;t find any products at the moment. Please check back later.</p>
+            <p className="text-gray-600 mb-4">
+              We couldn&apos;t find any products in this category.
+            </p>
+            <Link
+              href="/categories"
+              className="inline-flex items-center gap-2 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors"
+            >
+              Browse All Categories
+            </Link>
           </div>
         )}
       </div>

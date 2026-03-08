@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ShoppingCart, Menu } from 'lucide-react'
 import LanguageToggle from './LanguageToggle'
+import AuthButton from './AuthButton'
 import SearchBar from './SearchBar'
 import { useLanguage } from '@/app/context/LanguageContext'
 import Logo from '../../shared/Logo'
@@ -9,13 +10,15 @@ export default function NavbarDesktop() {
   const { t } = useLanguage()
 
   const handleCategoriesClick = () => {
-    // সরাসরি ইভেন্ট ডিসপ্যাচ
+    console.log('🔍 Categories button clicked')
+    
     if (typeof window !== 'undefined') {
+      console.log('🔍 Dispatching toggle event...')
       const event = new Event('toggleCategorySidebar')
       window.dispatchEvent(event)
-      
-      // ডিবাগ জন্য কনসোল
-      console.log('Toggle event dispatched')
+      console.log('✅ Toggle event dispatched successfully')
+    } else {
+      console.error('❌ Window object not available')
     }
   }
 
@@ -23,7 +26,7 @@ export default function NavbarDesktop() {
     <>
       {/* মেইন ন্যাভবার */}
       <div className="flex items-center justify-between py-3">
-        <Logo showText={true} textClassName="text-primary-800" />
+        <Logo showText={false} />
         
         <div className="flex-1 max-w-2xl mx-8">
           <SearchBar />
@@ -32,21 +35,8 @@ export default function NavbarDesktop() {
         <div className="flex items-center gap-4">
           <LanguageToggle />
           
-          <div className="flex items-center gap-2 border-r border-gray-200 pr-4 mr-2">
-            <Link 
-              href="/login" 
-              className="text-gray-700 hover:text-primary-700 font-medium text-sm"
-            >
-              {t('nav.login')}
-            </Link>
-            <span className="text-gray-300">|</span>
-            <Link 
-              href="/register" 
-              className="text-gray-700 hover:text-primary-700 font-medium text-sm"
-            >
-              {t('nav.signup')}
-            </Link>
-          </div>
+          {/* Unified Login/Signup Button */}
+          <AuthButton />
           
           <Link href="/cart" className="relative">
             <ShoppingCart size={24} className="text-gray-700 hover:text-primary-700 transition" />

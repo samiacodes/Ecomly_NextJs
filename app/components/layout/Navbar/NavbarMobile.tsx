@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Menu, X, ShoppingCart } from 'lucide-react'
 import SearchBar from './SearchBar'
 import LanguageToggle from './LanguageToggle'
+import AuthButton from './AuthButton'
+import Logo from '../../shared/Logo'
 import { useLanguage } from '@/app/context/LanguageContext'
 
 export default function NavbarMobile() {
@@ -22,9 +24,7 @@ export default function NavbarMobile() {
   return (
     <>
       <div className="flex items-center justify-between py-3">
-        <Link href="/" className="text-2xl font-bold text-primary">
-          Ecomly
-        </Link>
+        <Logo showText={false} imageClassName="h-[45px] w-[160px]" />
 
         <div className="flex items-center space-x-4">
           <LanguageToggle />
@@ -65,22 +65,8 @@ export default function NavbarMobile() {
             
             <div className="border-t border-gray-100 my-2"></div>
             
-            <div className="flex items-center gap-3 py-2">
-              <Link 
-                href="/login" 
-                className="flex-1 bg-primary-600 text-white text-center py-2 rounded-lg font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('nav.login')}
-              </Link>
-              <Link 
-                href="/register" 
-                className="flex-1 border border-primary-600 text-primary-600 text-center py-2 rounded-lg font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('nav.signup')}
-              </Link>
-            </div>
+            {/* Unified Login/Signup Button */}
+            <AuthButton onClick={() => setIsMenuOpen(false)} />
             
             <Link href="/track-order" className="text-gray-600" onClick={() => setIsMenuOpen(false)}>
               {t('nav.track')}
