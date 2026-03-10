@@ -53,17 +53,24 @@ function formatProthomashopProduct(product: ProthomashopProduct, baseUrl?: strin
     ? product.short_description.replace(/<[^>]*>/g, '').trim()
     : ''
   
-  return {
-    id: product.id.toString(),
+  // Ensure image URL is properly constructed
+  const imageUrl = product.image 
+    ? (baseUrl ? `${baseUrl}${product.image}` : `https://admin.prothomashop.com/public/uploads/products/${product.image}`)
+    : '/placeholder.jpg';
+  
+  console.log(`Product: ${product.title}, Image: ${product.image}, Full URL: ${imageUrl}`);
+  
+ return {
+   id: product.id.toString(),
     name: product.title,
     price: product.sale_price || product.price,
     oldPrice: product.price > product.sale_price ? product.price : undefined,
-    image: baseUrl ? `${baseUrl}${product.image}` : `https://admin.prothomashop.com/public/uploads/products/${product.image}`,
-    rating: {
-      stars: 4.5,
-      count: product.total_orders || 0
+   image: imageUrl,
+   rating: {
+     stars: 4.5,
+     count: product.total_orders || 0
     },
-    category: product.category || 'Book',
+   category: product.category || 'Book',
     description: cleanDescription,
     sku: product.sku,
     shipping_cost: product.shipping_cost,
@@ -123,7 +130,7 @@ async function fetchSingleSite(site: SiteConfig): Promise<SiteProducts> {
         name: item.title || item.name || 'Unknown',
         price: item.sale_price || item.price || 0,
         oldPrice: item.price && item.sale_price && item.price > item.sale_price ? item.price : undefined,
-        image: site.imageUrl ? `${site.imageUrl}${item.image}` : `https://admin.prothomashop.com/public/uploads/products/${item.image}`,
+        image: item.image ? (site.imageUrl ? `${site.imageUrl}${item.image}` : `https://admin.prothomashop.com/public/uploads/products/${item.image}`) : '/placeholder.jpg',
         rating: {
           stars: 4.5,
           count: item.total_orders || 0
@@ -148,31 +155,31 @@ async function fetchSingleSite(site: SiteConfig): Promise<SiteProducts> {
     } 
     // CASE 3: Data inside 'products' property
     else if (data.products) {
-      console.log(`${site.name}: Detected products property format`)
+    console.log(`${site.name}: Detected products property format`)
       products = data.products.map((p: any) => ({
         id: p.id.toString(),
         name: p.name || p.title || 'Unknown Product',
         price: p.sale_price || p.price,
         oldPrice: p.sale_price && p.sale_price < p.price ? p.price : undefined,
-        image: p.image || p.thumbnail || '/placeholder.jpg',
-        rating: {
-          stars: p.rating || 0,
-          count: p.reviews || 0
+      image: p.image ? `https://admin.prothomashop.com/public/uploads/products/${p.image}` : '/placeholder.jpg',
+      rating: {
+        stars: p.rating || 0,
+        count: p.reviews || 0
         }
       }))
     } 
     // CASE 4: Data inside 'result.products'
     else if (data.result?.products) {
-      console.log(`${site.name}: Detected result.products format with ${data.result.products.length} products`)
+     console.log(`${site.name}: Detected result.products format with ${data.result.products.length} products`)
       products = data.result.products.map((p: any) => ({
         id: p.id.toString(),
         name: p.name || p.title || 'Unknown Product',
         price: p.sale_price || p.price,
         oldPrice: p.sale_price && p.sale_price < p.price ? p.price : undefined,
-        image: p.image || p.thumbnail || '/placeholder.jpg',
-        rating: {
-          stars: p.rating || 0,
-          count: p.reviews || p.total_orders || 0
+       image: p.image ? `https://admin.prothomashop.com/public/uploads/products/${p.image}` : '/placeholder.jpg',
+       rating: {
+         stars: p.rating || 0,
+         count: p.reviews || p.total_orders || 0
         }
       }))
     }

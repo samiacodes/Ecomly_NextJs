@@ -13,14 +13,6 @@ export default function NavbarMobile() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { t } = useLanguage()
 
-  const handleCategoriesClick = () => {
-    setIsMenuOpen(false)
-    if (typeof window !== 'undefined') {
-      const event = new Event('toggleCategorySidebar')
-      window.dispatchEvent(event)
-    }
-  }
-
   return (
     <>
       <div className="flex items-center justify-between py-3">
@@ -28,7 +20,6 @@ export default function NavbarMobile() {
 
         <div className="flex items-center space-x-4">
           <LanguageToggle />
-          
           <Link href="/cart" className="relative">
             <ShoppingCart size={22} />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
@@ -48,26 +39,15 @@ export default function NavbarMobile() {
       {isMenuOpen && (
         <div className="py-4 border-t border-gray-100">
           <div className="flex flex-col space-y-4">
-            <button 
-              onClick={handleCategoriesClick}
-              className="flex items-center gap-2 text-gray-700 font-medium text-left"
-            >
-              <Menu size={18} />
-              {t('nav.categories')}
-            </button>
-            
             <Link href="/products" className="text-gray-700" onClick={() => setIsMenuOpen(false)}>
               {t('nav.products')}
             </Link>
             <Link href="/shops" className="text-gray-700" onClick={() => setIsMenuOpen(false)}>
               {t('nav.shops')}
             </Link>
-            
+
             <div className="border-t border-gray-100 my-2"></div>
-            
-            {/* Unified Login/Signup Button */}
             <AuthButton onClick={() => setIsMenuOpen(false)} />
-            
             <Link href="/track-order" className="text-gray-600" onClick={() => setIsMenuOpen(false)}>
               {t('nav.track')}
             </Link>

@@ -27,7 +27,7 @@ export default function Logo({
       </div>
       {showText && (
         <span className={`text-xl font-bold text-primary-600 ${textClassName}`}>
-          Ecomly
+          Ecomly 
         </span>
       )}
     </Link>

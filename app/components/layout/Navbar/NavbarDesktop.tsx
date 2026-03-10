@@ -1,67 +1,47 @@
 import Link from 'next/link'
-import { ShoppingCart, Menu } from 'lucide-react'
+import { ShoppingCart } from 'lucide-react'
 import LanguageToggle from './LanguageToggle'
 import AuthButton from './AuthButton'
 import SearchBar from './SearchBar'
-import { useLanguage } from '@/app/context/LanguageContext'
+import { useLanguage} from '@/app/context/LanguageContext'
 import Logo from '../../shared/Logo'
 
 export default function NavbarDesktop() {
   const { t } = useLanguage()
 
-  const handleCategoriesClick = () => {
-    console.log('🔍 Categories button clicked')
-    
-    if (typeof window !== 'undefined') {
-      console.log('🔍 Dispatching toggle event...')
-      const event = new Event('toggleCategorySidebar')
-      window.dispatchEvent(event)
-      console.log('✅ Toggle event dispatched successfully')
-    } else {
-      console.error('❌ Window object not available')
-    }
-  }
-
-  return (
+ return (
     <>
-      {/* মেইন ন্যাভবার */}
+      {/* Main Navbar */}
       <div className="flex items-center justify-between py-3">
         <Logo showText={false} />
-        
+
         <div className="flex-1 max-w-2xl mx-8">
           <SearchBar />
         </div>
 
         <div className="flex items-center gap-4">
-          <LanguageToggle />
-          
-          {/* Unified Login/Signup Button */}
-          <AuthButton />
-          
-          <Link href="/cart" className="relative">
-            <ShoppingCart size={24} className="text-gray-700 hover:text-primary-700 transition" />
-            <span className="absolute -top-2 -right-2 bg-secondary-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-              0
-            </span>
-          </Link>
-        </div>
+         <LanguageToggle />
+         <AuthButton />
+         <Link href="/cart" className="relative">
+           <ShoppingCart size={24} className="text-gray-700 hover:text-primary-700 transition" />
+           <span className="absolute -top-2 -right-2 bg-secondary-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+             0
+           </span>
+         </Link>
+       </div>
       </div>
 
-      {/* ক্যাটাগরি মেনু */}
+      {/* Category Menu */}
       <div className="flex items-center justify-between py-2 bg-primary-50 rounded-lg px-4">
         <div className="flex items-center space-x-8">
-          <button 
-            onClick={handleCategoriesClick}
-            className="flex items-center gap-2 text-gray-700 hover:text-primary-700 font-medium cursor-pointer"
-          >
-            <Menu size={18} />
-            {t('nav.categories')}
-          </button>
           <Link href="/products" className="text-gray-700 hover:text-primary-700 font-medium">
             {t('nav.products')}
           </Link>
           <Link href="/shops" className="text-gray-700 hover:text-primary-700 font-medium">
             {t('nav.shops')}
+          </Link>
+          <Link href="/categories" className="text-gray-700 hover:text-primary-700 font-medium flex items-center gap-1">
+           Categories
           </Link>
         </div>
 

@@ -12,20 +12,28 @@ export default function SiteTabs({ sitesData }: SiteTabProps) {
   const [activeSite, setActiveSite] = useState(sitesData[0]?.site || '')
 
   const activeProducts = sitesData.find(s => s.site === activeSite)?.products || []
+  
+  // Debug logging
+  console.log('SiteTabs received sitesData:', sitesData);
+  console.log('Active site:', activeSite);
+  console.log('Active products count:', activeProducts.length);
+  if (activeProducts.length > 0) {
+   console.log('First product image:', activeProducts[0].image);
+  }
 
-  return (
+ return (
     <div>
       {/* Product grid - without tabs, just products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {activeProducts.slice(0, 8).map((product: Product) => (
           <ProductCard
             key={product.id}
-            id={product.id}
+           id={product.id}
             name={product.name}
             price={product.price}
             oldPrice={product.oldPrice}
-            image={product.image}
-            rating={product.rating.stars}
+           image={product.image}
+           rating={product.rating.stars}
             reviewCount={product.rating.count}
           />
         ))}
