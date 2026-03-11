@@ -8,10 +8,12 @@ import LanguageToggle from './LanguageToggle'
 import AuthButton from './AuthButton'
 import Logo from '../../shared/Logo'
 import { useLanguage } from '@/app/context/LanguageContext'
+import { useCart } from '@/app/context/CartContext'
 
 export default function NavbarMobile() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { t } = useLanguage()
+  const { totalItems } = useCart()
 
   return (
     <>
@@ -22,9 +24,11 @@ export default function NavbarMobile() {
           <LanguageToggle />
           <Link href="/cart" className="relative">
             <ShoppingCart size={22} />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-              0
-            </span>
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                {totalItems}
+              </span>
+            )}
           </Link>
           <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

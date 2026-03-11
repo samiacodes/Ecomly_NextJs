@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Heart, ShoppingCart, Star, Eye } from 'lucide-react'
 import { useState } from 'react'
 import { useLanguage } from '@/app/context/LanguageContext'
+import { useCart } from '@/app/context/CartContext'
 
 interface ProductCardProps {
   id: string
@@ -31,6 +32,12 @@ export default function ProductCard({
   const [isHovered, setIsHovered] = useState(false)
   const [imageError, setImageError] = useState(false)
   const { t } = useLanguage()
+  const { addToCart } = useCart()
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    addToCart({ id, name, price, image })
+  }
 
   // Calculate discount percentage
   const discountPercentage = oldPrice 
@@ -80,7 +87,10 @@ export default function ProductCard({
               <Eye size={20} />
             </button>
           </Link>
-          <button className="bg-white p-3 rounded-full hover:bg-primary hover:text-white transition-colors">
+          <button 
+            onClick={handleAddToCart}
+            className="bg-white p-3 rounded-full hover:bg-primary hover:text-white transition-colors"
+          >
             <ShoppingCart size={20} />
           </button>
         </div>
@@ -118,7 +128,10 @@ export default function ProductCard({
         </div>
 
         {/* Add to Cart Button */}
-        <button className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors flex items-center justify-center gap-2">
+        <button 
+          onClick={handleAddToCart}
+          className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors flex items-center justify-center gap-2"
+        >
           <ShoppingCart size={18} />
           {t('products.addToCart')}
         </button>

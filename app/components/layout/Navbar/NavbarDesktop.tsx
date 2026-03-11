@@ -1,13 +1,17 @@
+'use client'
+
 import Link from 'next/link'
 import { ShoppingCart } from 'lucide-react'
 import LanguageToggle from './LanguageToggle'
 import AuthButton from './AuthButton'
 import SearchBar from './SearchBar'
 import { useLanguage} from '@/app/context/LanguageContext'
+import { useCart } from '@/app/context/CartContext'
 import Logo from '../../shared/Logo'
 
 export default function NavbarDesktop() {
   const { t } = useLanguage()
+  const { totalItems } = useCart()
 
  return (
     <>
@@ -24,16 +28,18 @@ export default function NavbarDesktop() {
          <AuthButton />
          <Link href="/cart" className="relative">
            <ShoppingCart size={24} className="text-gray-700 hover:text-primary-700 transition" />
-           <span className="absolute -top-2 -right-2 bg-secondary-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-             0
-           </span>
+           {totalItems > 0 && (
+             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full font-bold">
+               {totalItems}
+             </span>
+           )}
          </Link>
        </div>
       </div>
 
       {/* Category Menu */}
       <div className="flex items-center justify-between py-2 bg-primary-50 rounded-lg px-4">
-        <div className="flex items-center space-x-8">
+        <div className="flex items-center space-x-4">
           <Link href="/products" className="text-gray-700 hover:text-primary-700 font-medium">
             {t('nav.products')}
           </Link>

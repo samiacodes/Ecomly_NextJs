@@ -4,6 +4,7 @@ import Navbar from './components/layout/Navbar'
 import CategorySidebarWrapper from './components/layout/CategorySidebarWrapper'
 import { LanguageProvider } from './context/LanguageContext'
 import { CategorySidebarProvider } from '@/app/context/CategorySidebarContext'
+import { CartProvider } from '@/app/context/CartContext'
 import './globals.css'
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -20,14 +21,14 @@ export default function RootLayout({
     <html lang="en" className={cn("font-sans", geist.variable)}>
       <body>
         <LanguageProvider>
-         <CategorySidebarProvider>
-          <Navbar />
-          <div className="flex">
-            <CategorySidebarWrapper />
-            <main className="flex-1">{children}</main>
-          </div>
-          <Footer />
-         </CategorySidebarProvider>
+          <CartProvider>
+            <CategorySidebarProvider>
+              <Navbar />
+              <main className="min-h-screen lg:ml-72">{children}</main>
+              <CategorySidebarWrapper />
+              <Footer />
+            </CategorySidebarProvider>
+          </CartProvider>
         </LanguageProvider>
       </body>
     </html>

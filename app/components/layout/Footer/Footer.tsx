@@ -10,7 +10,7 @@ import FooterHelp from "./FooterHelp"
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-200 mt-12">
+    <footer className="bg-white border-t border-gray-200 mt-12 relative z-40">
       <div className="container-custom py-12">
         {/* মূল ফুটার গ্রিড */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
