@@ -14,12 +14,12 @@ export default function FooterBottom() {
           <h3 className="font-semibold text-lg mb-3">{t('footer.support')}</h3>
           <p className="text-2xl font-bold text-primary mb-4">+8806780400000</p>
           <div>
-            <h4 className="font-medium mb-2">{t('footer.download')}</h4>
+            <h4 className="font-medium mb-2 text-gray-900">{t('footer.download')}</h4>
             <div className="flex space-x-3">
-              <button className="bg-black text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-800 transition">
+              <button className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition">
                 Google Play
               </button>
-              <button className="bg-black text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-800 transition">
+              <button className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition">
                 App Store
               </button>
             </div>
@@ -30,8 +30,8 @@ export default function FooterBottom() {
         <div className="flex items-center justify-center">
           <div className="text-center">
             <p className="text-gray-600 mb-2">{t('footer.verified')}</p>
-            <div className="bg-gray-100 px-6 py-3 rounded-lg">
-              <span className="font-semibold">SSL.commerz</span>
+            <div className="bg-green-50 px-6 py-3 rounded-lg border border-green-600">
+              <span className="font-semibold text-green-600">SSL.commerz</span>
             </div>
           </div>
         </div>

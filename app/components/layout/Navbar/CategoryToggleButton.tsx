@@ -16,7 +16,7 @@ export default function CategoryToggleButton() {
   return (
     <button
       onClick={handleToggleClick}
-      className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
+      className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-green-600 transition"
       aria-label="Toggle categories sidebar"
     >
       <Menu size={18} />

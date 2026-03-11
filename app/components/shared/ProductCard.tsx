@@ -62,7 +62,7 @@ export default function ProductCard({
         
         {/* Badge */}
         {discountPercentage && (
-          <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full z-10">
+          <span className="absolute top-3 left-3 bg-secondary text-white text-sm font-bold px-3 py-1 rounded-full z-10">
             -{discountPercentage}%
           </span>
         )}
@@ -130,7 +130,7 @@ export default function ProductCard({
         {/* Add to Cart Button */}
         <button 
           onClick={handleAddToCart}
-          className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors flex items-center justify-center gap-2"
+          className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
         >
           <ShoppingCart size={18} />
           {t('products.addToCart')}

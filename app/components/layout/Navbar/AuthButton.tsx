@@ -30,7 +30,7 @@ export default function AuthButton({ className = '', onClick }: AuthButtonProps)
       {/* Unified Login/Signup Button */}
       <button
         onClick={handleButtonClick}
-        className={`bg-gray-100 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors ${className}`}
+        className={`bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-600 transition-colors ${className}`}
       >
         Login / Sign Up
       </button>

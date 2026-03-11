@@ -6,6 +6,7 @@ import { Menu, X, ShoppingCart } from 'lucide-react'
 import SearchBar from './SearchBar'
 import LanguageToggle from './LanguageToggle'
 import AuthButton from './AuthButton'
+import CategoryToggleButton from './CategoryToggleButton'
 import Logo from '../../shared/Logo'
 import { useLanguage } from '@/app/context/LanguageContext'
 import { useCart } from '@/app/context/CartContext'
@@ -43,22 +44,23 @@ export default function NavbarMobile() {
       {isMenuOpen && (
         <div className="py-4 border-t border-gray-100">
           <div className="flex flex-col space-y-4">
-            <Link href="/products" className="text-gray-700" onClick={() => setIsMenuOpen(false)}>
+            <CategoryToggleButton />
+            <Link href="/products" className="text-gray-700 hover:text-green-600 transition-colors" onClick={() => setIsMenuOpen(false)}>
               {t('nav.products')}
             </Link>
-            <Link href="/shops" className="text-gray-700" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/shops" className="text-gray-700 hover:text-green-600 transition-colors" onClick={() => setIsMenuOpen(false)}>
               {t('nav.shops')}
             </Link>
 
             <div className="border-t border-gray-100 my-2"></div>
             <AuthButton onClick={() => setIsMenuOpen(false)} />
-            <Link href="/track-order" className="text-gray-600" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/track-order" className="text-gray-600 hover:text-green-600 transition-colors" onClick={() => setIsMenuOpen(false)}>
               {t('nav.track')}
             </Link>
-            <Link href="/help" className="text-gray-600" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/help" className="text-gray-600 hover:text-green-600 transition-colors" onClick={() => setIsMenuOpen(false)}>
               {t('nav.help')}
             </Link>
-            <Link href="/sell" className="text-gray-600" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/sell" className="text-gray-600 hover:text-green-600 transition-colors" onClick={() => setIsMenuOpen(false)}>
               {t('nav.sell')}
             </Link>
           </div>

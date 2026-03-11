@@ -8,30 +8,30 @@ export default function FooterHelp() {
 
   return (
     <div>
-      <h3 className="font-semibold text-lg mb-4">HELP</h3>
+      <h3 className="font-semibold text-lg mb-4 text-gray-900">HELP</h3>
       <ul className="space-y-2">
         <li>
-          <Link href="/contact" className="text-gray-600 hover:text-primary transition">
+          <Link href="/contact" className="text-gray-500 hover:text-green-600 transition-colors">
             {t('footer.contact')}
           </Link>
         </li>
         <li>
-          <Link href="/faq" className="text-gray-600 hover:text-primary transition">
+          <Link href="/faq" className="text-gray-500 hover:text-green-600 transition-colors">
             {t('footer.faq')}
           </Link>
         </li>
         <li>
-          <Link href="/how-to-buy" className="text-gray-600 hover:text-primary transition">
+          <Link href="/how-to-buy" className="text-gray-500 hover:text-green-600 transition-colors">
             {t('footer.howToBuy')}
           </Link>
         </li>
         <li>
-          <Link href="/sell" className="text-gray-600 hover:text-primary transition">
+          <Link href="/sell" className="text-gray-500 hover:text-green-600 transition-colors">
             {t('footer.sell')}
           </Link>
         </li>
         <li>
-          <Link href="/university" className="text-gray-600 hover:text-primary transition">
+          <Link href="/university" className="text-gray-500 hover:text-green-600 transition-colors">
             {t('footer.university')}
           </Link>
         </li>

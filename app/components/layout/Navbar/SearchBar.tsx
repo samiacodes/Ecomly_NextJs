@@ -19,7 +19,7 @@ export default function SearchBar() {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder={t('search.placeholder')}
-        className="w-full border-2 border-gray-200 rounded-lg py-2.5 pl-4 pr-20 focus:border-primary outline-none"
+        className="w-full border-2 border-primary-200 rounded-lg py-2.5 pl-4 pr-20 focus:border-primary outline-none transition-colors"
       />
       <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center space-x-1">
         <button 
@@ -29,7 +29,7 @@ export default function SearchBar() {
         >
           <Camera size={20} className="text-gray-500" />
         </button>
-        <button className="p-1.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition">
+        <button className="p-1.5 bg-primary text-white rounded-lg hover:bg-green-600 transition">
           <Search size={20} />
         </button>
       </div>

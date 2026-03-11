@@ -51,7 +51,7 @@ export default function SiteTabs({ sitesData }: SiteTabProps) {
        {displayedCount < activeProducts.length && (
          <button 
           onClick={handleLoadMore}
-           className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+           className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium"
          >
            Load More Products
          </button>

@@ -33,7 +33,7 @@ const categories = [
 
 export default function CategorySidebar() {
   const pathname = usePathname()
-  const { closeSidebar } = useCategorySidebar()
+  const { isOpen, closeSidebar } = useCategorySidebar()
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -48,7 +48,6 @@ export default function CategorySidebar() {
 
   // On mobile, show overlay sidebar (controlled by isOpen)
   if (isMobile) {
-    const { isOpen } = useCategorySidebar()
     if (!isOpen) return null
     
     return (
@@ -85,16 +84,16 @@ export default function CategorySidebar() {
                     className={`
                       flex items-center justify-between px-3 py-2.5 rounded-lg transition-all
                       ${isActive 
-                        ? 'bg-blue-50 text-blue-600' 
+                        ? 'bg-green-50 text-green-600' 
                         : 'text-gray-700 hover:bg-gray-50'
                       }
                     `}
                   >
                     <div className="flex items-center gap-3">
-                      <Icon size={18} className={isActive ? 'text-blue-600' : 'text-gray-500'} />
+                      <Icon size={18} className={isActive ? 'text-green-600' : 'text-gray-500'} />
                       <span className="font-medium">{category.name}</span>
                     </div>
-                    <ChevronRight size={16} className={isActive ? 'text-blue-600' : 'text-gray-400'} />
+                    <ChevronRight size={16} className={isActive ? 'text-green-600' : 'text-gray-400'} />
                   </Link>
                 )
               })}
@@ -126,16 +125,16 @@ export default function CategorySidebar() {
                 className={`
                   flex items-center justify-between px-3 py-2.5 rounded-lg transition-all
                   ${isActive 
-                    ? 'bg-blue-50 text-blue-600' 
+                    ? 'bg-green-50 text-green-600' 
                     : 'text-gray-700 hover:bg-gray-50'
                   }
                 `}
               >
                 <div className="flex items-center gap-3">
-                  <Icon size={18} className={isActive ? 'text-blue-600' : 'text-gray-500'} />
+                  <Icon size={18} className={isActive ? 'text-green-600' : 'text-gray-500'} />
                   <span className="font-medium">{category.name}</span>
                 </div>
-                <ChevronRight size={16} className={isActive ? 'text-blue-600' : 'text-gray-400'} />
+                <ChevronRight size={16} className={isActive ? 'text-green-600' : 'text-gray-400'} />
               </Link>
             )
           })}

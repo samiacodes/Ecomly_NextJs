@@ -8,25 +8,25 @@ export default function FooterAbout() {
 
   return (
     <div>
-      <h3 className="font-semibold text-lg mb-4">{t('footer.about')}</h3>
+      <h3 className="font-semibold text-lg mb-4 text-gray-900">{t('footer.about')}</h3>
       <ul className="space-y-2">
         <li>
-          <Link href="/about" className="text-gray-600 hover:text-primary transition">
+          <Link href="/about" className="text-gray-500 hover:text-green-600 transition-colors">
             {t('footer.about')}
           </Link>
         </li>
         <li>
-          <Link href="/terms" className="text-gray-600 hover:text-primary transition">
+          <Link href="/terms" className="text-gray-500 hover:text-green-600 transition-colors">
             {t('footer.terms')}
           </Link>
         </li>
         <li>
-          <Link href="/refund" className="text-gray-600 hover:text-primary transition">
+          <Link href="/refund" className="text-gray-500 hover:text-green-600 transition-colors">
             {t('footer.refund')}
           </Link>
         </li>
         <li>
-          <Link href="/privacy" className="text-gray-600 hover:text-primary transition">
+          <Link href="/privacy" className="text-gray-500 hover:text-green-600 transition-colors">
             {t('footer.privacy')}
           </Link>
         </li>

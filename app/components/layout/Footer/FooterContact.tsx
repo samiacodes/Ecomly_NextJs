@@ -10,33 +10,33 @@ export default function FooterContact() {
   return (
     <div className="space-y-4">
       <div>
-        <h3 className="font-semibold text-lg mb-4">{t('footer.contact')}</h3>
+        <h3 className="font-semibold text-lg mb-4 text-gray-900">{t('footer.contact')}</h3>
         <ul className="space-y-3">
           <li className="flex items-start space-x-3">
-            <MapPin size={20} className="text-gray-500 mt-1 shrink-0" />
+            <MapPin size={20} className="text-gray-400 mt-1 shrink-0" />
             <span className="text-gray-600">House #4, Rd No. 2(A) Uttora, Dhaka 1225</span>
           </li>
           <li className="flex items-center space-x-3">
-            <Phone size={20} className="text-gray-500" />
+            <Phone size={20} className="text-gray-400" />
             <span className="text-gray-600">+880698777788</span>
           </li>
           <li className="flex items-center space-x-3">
-            <Mail size={20} className="text-gray-500" />
+            <Mail size={20} className="text-gray-400" />
             <span className="text-gray-600">info@eComly.com</span>
           </li>
         </ul>
       </div>
 
       <div>
-        <h3 className="font-semibold text-lg mb-3">Follow us on</h3>
+        <h3 className="font-semibold text-lg mb-3 text-gray-900">Follow us on</h3>
         <div className="flex space-x-4">
-          <Link href="https://facebook.com" className="bg-gray-100 p-2 rounded-full hover:bg-black hover:text-white transition">
+          <Link href="https://facebook.com" className="bg-gray-100 p-2 rounded-full hover:bg-green-600 hover:text-white transition-colors">
             <Facebook size={20} />
           </Link>
-          <Link href="https://instagram.com" className="bg-gray-100 p-2 rounded-full hover:bg-black hover:text-white transition">
+          <Link href="https://instagram.com" className="bg-gray-100 p-2 rounded-full hover:bg-green-600 hover:text-white transition-colors">
             <Instagram size={20} />
           </Link>
-          <Link href="https://youtube.com" className="bg-gray-100 p-2 rounded-full hover:bg-black hover:text-white transition">
+          <Link href="https://youtube.com" className="bg-gray-100 p-2 rounded-full hover:bg-green-600 hover:text-white transition-colors">
             <Youtube size={20} />
           </Link>
         </div>
